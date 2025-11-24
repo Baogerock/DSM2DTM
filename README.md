@@ -27,7 +27,29 @@ We used the data of the Cantons of Zuerich, St. Gallen, and Vaud for training an
 
 #### Testing
 
-The Canton of Fribourg was used for testing. The collection of selected images for both DSM and DTM is listed in dsm_test.txt and dgm_test.txt, respectively. 
+The Canton of Fribourg was used for testing. The collection of selected images for both DSM and DTM is listed in dsm_test.txt and dgm_test.txt, respectively.
+
+## Downloading and organizing the data
+
+You can automatically download the source GeoTIFFs and create the 256×256 patches described above by running `prepare_dataset.py`. The script expects the metadata in the `dataset/DSMs` and `dataset/DTMs` folders, downloads all referenced tiles, and saves split-specific patches under `prepared_dataset/patches/<split>/<modality>/<canton>/`.
+
+1. Install the small Python dependencies:
+
+   ```bash
+   pip install pillow requests
+   ```
+
+2. Download all tiles and extract patches (uses four threads by default):
+
+   ```bash
+   python prepare_dataset.py --output-root prepared_dataset
+   ```
+
+3. If you already have the tiles (e.g., downloaded previously), skip the download step and only generate the patches:
+
+   ```bash
+   python prepare_dataset.py --output-root prepared_dataset --skip-download
+   ```
 
 ## BibTeX citation
 If you use this dataset to compare your findings with ours, please consider citing the following publication:
